@@ -1,0 +1,61 @@
+﻿No way ......
+<form name="editOrderForm">
+    <div class="container">
+        <div class="col-md-6">
+            <div class="input-group" ng-if="newOrder">
+                <label>
+                    OrderId
+                </label>
+                <input type="text" readonly="readonly" class="form-control" ng-model="order.Id">
+            </div>
+
+            <div class="input-group">
+                <label>
+                    Product Name
+                </label>
+                <select class="form-control" ng-model="order.Product.Id">
+                    <option ng-repeat="product in products" value="{{product.Id}}">{{product.Name}} </option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>
+                    Quantity
+                </label>
+                <input type="number" class="form-control" ng-model="order.Quantity">
+            </div>
+            <div class="input-group">
+                <label>
+                    Category Name
+                </label>
+                <select class="form-control" ng-model="order.Product.Category.Id">
+                    <option ng-repeat="category in categories" value="{{category.Id}}">{{category.Name}} </option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>
+                    User Name
+                </label>
+                <select class="form-control" ng-model="order.User.Id">
+                    <option ng-repeat="user in users" value="{{user.Id}}">{{user.Name}} </option>
+                </select>
+            </div>
+            <br/>
+            <br/>
+            <div class="input-group">
+                <div class="row">
+                    <div class="col-md-6">
+                    
+                        <button class="btn btn-default form-control" ng-click="saveOrder(order,editOrderForm)">Save</button>
+                    </div>
+                    <div class="col-md-6">
+                        
+                        <button class="btn btn-default form-control" ng-click="cancel(order,editOrderForm)">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" ng-if="validationErrors">
+            <validation-summary errors="validationErrors"></validation-summary>
+        </div>
+    </div>
+</form>

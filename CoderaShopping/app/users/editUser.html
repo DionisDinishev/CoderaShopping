@@ -1,0 +1,67 @@
+﻿<form name="editUserForm" novalidate>
+    <div class="container">
+        <div class="col-md-6">
+            <div class="input-group" ng-class="{'has-error':editUserForm.name.$invalid && editUserForm.name.$touched }">
+                <label>Name</label>
+                <input type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1" value="{{user.Name}}" ng-model="user.Name" name="name"
+                       ng-required="true"
+                       ng-minlength="4"
+                       ng-maxlength="50">
+            </div>
+            <div ng-messages="editUserForm.name.$error" style="color: red">
+                <p ng-message="required">This field is requierd</p>
+                <p ng-message="minlength">Name should me at least 4 characteres</p>
+                <p ng-message="maxlength">Name should be maximum 50 characters</p>
+            </div>
+            <br />
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" class="form-control" placeholder="Email" aria-describedby="basic-addon1" value="{{user.Email}}" ng-model="user.Email" name="email">
+                <div ng-messages="editUserForm.email.$error" ng-if="editUserForm.email.$touched" style="color: red">
+                    <p ng-message="required">This field is requierd</p>
+                    <p ng-message="minlength">Name should me at least 4 characteres</p>
+                    <p ng-message="maxlength">Name should be maximum 50 characters</p>
+                </div>
+            </div>
+            <br />
+            <div class="input-group">
+                <label>Phone</label>
+                <input type="text" ng-pattern="regex" class="form-control" placeholder="Phone" aria-describedby="basic-addon1" value="{{user.Phone}}" ng-model="user.Phone" name="phone" />
+                <div ng-if="editUserForm.phone.$invalid" style="color: red">
+                    <p>Phone should only contains numbers</p>
+                </div>
+            </div>
+            <br />
+            <div class="input-group">
+                <label>User Type</label>
+                <select ng-model="user.UserType" class="form-control" name="UserType" ng-required="true">
+                    <option ng-repeat="type in userType" value="{{type.Name}}">{{ type.Name }}</option>
+                </select>
+                <div ng-messages="editUserForm.UserType.$error" style="color: red">
+                    <p ng-message="required">This field is requierd</p>
+                    <p ng-message="minlength">Name should me at least 4 characteres</p>
+                    <p ng-message="maxlength">Name should be maximum 50 characters</p>
+                </div>
+
+            </div>
+            <br />
+            <div class="input-group">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <button class="btn btn-default form-control" ng-click="saveUser(user,editUserForm)" type="submit" ng-disabled="editUserForm.$invalid">Save</button>
+                    </div>
+                    <div class="col-md-6">
+
+                        <button class="btn btn-default form-control" ng-click="cancel(user,editUserForm)">Cancel</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6" ng-if="validationErrors">
+            <validation-summary errors="validationErrors"></validation-summary>
+        </div>
+
+    </div>
+</form>

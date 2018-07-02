@@ -1,0 +1,63 @@
+﻿<button class="btn btn-default" ui-sref="orders/new">Create New Order</button>
+<br/>
+<hr/>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Orders are sorted by: {{propertyName}} in {{reverse? 'Descending':'Acsending'}} order</div>
+    <div class="panel-heading">
+        
+        <br/>
+        <div class="input-group">
+            <input type="text" ng-model="search" placeholder="Search" class="form-control" />
+        </div>
+        <br/>
+    </div>
+    <!-- Table -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th ng-click="sortBy('Id')">
+                OrderID
+                <sort-column asc="!reverse" name="Name" ng-show="propertyName==='Id'"></sort-column>
+            </th>
+            <th ng-click="sortBy('Product')">
+                Product
+                <sort-column asc="!reverse" name="Name" ng-show="propertyName==='Product'"></sort-column>
+            </th>
+            <th ng-click="sortBy('Quantity')">
+                Quantity
+                <sort-column asc="!reverse" name="Name" ng-show="propertyName==='Quantity'"></sort-column>
+            </th>
+            <!--<th>
+                Product Category
+            </th>--> 
+            <th ng-click="sortBy('User.Name')">
+                User Name
+                <sort-column asc="!reverse" name="Name" ng-show="propertyName==='User.Name'"></sort-column>
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="order in orders | filter:search | orderBy:propertyName:reverse">
+            <td>{{order.Id}}</td>
+            <td>{{order.Product.Name}}</td>
+            <td>{{order.Quantity}}</td>
+            <!--<td>{{order.Product.Category.Name}}</td>--> 
+            <td>{{order.User.Name}}</td>
+            <td><button ng-click="editOrder(order.Id)" class="form-control">Edit</button></td>
+            <td><button ng-click="deleteOrder(order)" class="form-control">Delete</button></td>
+        </tr>
+        </tbody>
+        
+    </table>
+    <ul 
+        boundary-link-numbers="true"
+        class="pagination-sm" 
+        ng-model="currentPage" 
+        total-items="ordersLenght" 
+        ng-change="changePage()"
+        items-per-page="maxSize"
+        uib-pagination></ul>
+
+</div>

@@ -1,0 +1,54 @@
+﻿
+
+<hr />
+<button ui-sref="category/new" class="btn btn-default">Create New Category</button>
+<br />
+<hr />
+<div class="input-group">
+    <label>Show Disabled</label>
+    <input type="checkbox" ng-model="showDisabled" />
+</div>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Orders are sorted by: {{propertyName}} in {{reverse? 'Descending':'Acsending'}} order</div>
+    <div class="panel-heading">
+        
+        <br/>
+        <div class="input-group">
+            <input type="text" ng-model="search" placeholder="Search" ng-change="change(search)" class="form-control" />
+        </div>
+        <br/>
+    </div>
+    <!-- Table -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th ng-click="sortBy('Name')">
+                Name
+                <sort-column asc="!reverse"  name="Name" ng-show="propertyName==='Name'"></sort-column>
+            </th>
+            <th ng-click="sortBy('Status')">
+                Status
+                <sort-column asc="!reverse"  name="Name" ng-show="propertyName==='Status'"></sort-column>
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="category in categories">
+            <td>{{category.Name}}</td>
+            <td>{{category.Status==true? "Enabled":"Disabled"}}</td>
+            <td><button ng-click="editCategory(category.Id)" class="form-control">Edit</button></td>
+            <td><button ng-click="deleteCategory(category)" class="form-control">Delete</button></td>
+            
+        </tr>
+        </tbody>
+    </table>
+    <ul boundary-link-numbers="true"
+        class="pagination-sm"
+        ng-model="currentPage"
+        total-items="categoriesLenght"
+        ng-change="changePage()"
+        items-per-page="maxSize"
+        uib-pagination></ul>
+</div>

@@ -1,0 +1,63 @@
+﻿
+<hr />
+<button ui-sref="users/new" class="btn btn-default">Create New User</button>
+<br/>
+<hr />
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+
+    <div class="panel-heading">
+        Users are sorted by: {{propertyName}} in {{reverse? 'Descending':'Acsending'}} order
+
+    </div>
+    <div class="panel-heading">
+
+        <br />
+        <div class="input-group">
+            <input type="text" ng-model="search" ng-change="change(search)" placeholder="Search" class="form-control" />
+        </div>
+        <br />
+    </div>
+
+
+    <!-- Table -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th ng-click="sortBy('Name')">
+                    Name
+                    <sort-column asc="!reverse" ng-click="clickSort(this)" name="Name" ng-show="propertyName==='Name'"></sort-column>
+                </th>
+                <th ng-click="sortBy('Email')">
+                    Email
+                    <sort-column asc="!reverse" ng-click="clickSort(this)" name="Email" ng-show="propertyName==='Email'"> </sort-column>
+                </th>
+                <th ng-click="sortBy('Phone')">
+                    Phone
+                    <sort-column asc="!reverse" ng-click="clickSort(this)" name="Phone" ng-show="propertyName==='Phone'"></sort-column>
+                </th>
+                <th ng-click="sortBy('UserType')">
+                    User Type
+                    <sort-column asc="!reverse" ng-click="clickSort(this)" name="UserType" ng-show="propertyName==='UserType'"></sort-column>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users ">
+                <td>{{user.Name}}</td>
+                <td>{{user.Email}}</td>
+                <td>{{user.Phone}}</td>
+                <td>{{user.UserType}}</td>
+                <td><button ng-click="editUser(user.Id)" class="form-control">Edit</button></td>
+                <td><button ng-click="deleteUser(user)" class="form-control">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <ul boundary-link-numbers="true"
+        class="pagination-sm"
+        ng-model="currentPage"
+        total-items="usersLenght"
+        ng-change="changePage()"
+        items-per-page="maxSize"
+        uib-pagination></ul>
+</div>

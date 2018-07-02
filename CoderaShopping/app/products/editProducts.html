@@ -1,0 +1,54 @@
+﻿Yeah Bitch
+
+<form name="editProductForm">
+    <div class="container">
+        <div class="col-md-6">
+            <div class="form-group" ng-class="{'has-error':editProductForm.name.$invalid && editProductForm.name.$touched }">
+                <label>Name</label>
+                <input type="text" name="name" class="form-control" placeholder="Name" aria-describedby="basic-addon1" value="{{product.Name}}" ng-model="product.Name" 
+                       ng-required="true" 
+                       ng-minlength="4"
+                       ng-maxlength="50">
+                <div ng-messages="editProductForm.name.$error" style="color: red">
+                    <p ng-message="required">This field is requierd</p>
+                    <p ng-message="minlength">Name should me at least 4 characteres</p>
+                    <p ng-message="maxlength">Name should be maximum 50 characters</p>
+                </div>
+            </div>
+            <br/>
+            <div class="input-group">
+                <label>Description</label>
+                <input type="text" class="form-control" placeholder="Description" aria-describedby="basic-addon1" value="{{product.Description}}" ng-model="product.Description" name="description">
+                <div ng-messages="editProductForm.name.$error" ng-if="editProductForm.name.$touched">
+                    <p ng-message="maxlength">Name should be maximum 50 characters</p>
+                </div>
+            </div>
+            <br/>
+            <div class="input-group">
+                <label>Category</label>
+                <!--<select ng-model="product.Category.Id" class="form-control">
+        <option value="{{ category.Id }}" ng-repeat="category in categories">{{ category.Name }}</option>
+    </select>-->    
+                <select class="form-control" ng-model="product.Category" ng-options="value.Name for (key, value) in categories"></select>
+            </div>
+            <br/>
+            <div class="input-group">
+                
+                <div class="row">
+                    <div class="col-md-6">
+                    
+                        <button class="btn btn-default left" ng-click="saveProduct(product,editProductForm)" type="submit" ng-disabled="editProductForm.$invalid">Save</button>
+                    </div>
+                    <div class="col-md-6">
+                        
+                        <button class="btn btn-default right" ng-click="cancel(product,editProductForm)">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6" ng-if="validationErrors">
+            <validation-summary errors="validationErrors"></validation-summary>
+        </div>
+    </div>
+</form>

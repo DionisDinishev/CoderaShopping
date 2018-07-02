@@ -1,0 +1,26 @@
+﻿<button class="btn btn-default" ui-sref="multiOrders/new">Create New Order</button>
+<br/>
+<hr/>
+
+<input ng-change="change(search)" ng-model="search" class="form-control" placeholder="Search"/>
+<ul>
+    <li ng-repeat="order in orders">
+        <h3>OrderId:{{order.Order.Id}}</h3>
+        <h4>User Name: {{order.Order.User.Name}}</h4>
+        <ol >
+            <li ng-repeat="product in order.Products">
+                <span>Product Name: {{product.Name}}</span> <br/> <span>Product Category: {{product.Category.Name}}</span> <br/><span>Product Quantity: {{order.Quantity}}</span>
+            </li>
+        </ol>
+        <button ng-click="editOrder(order.Order.Id)">Edit</button>
+        <button>Delete</button>
+    </li>
+</ul>
+
+<ul boundary-link-numbers="true"
+    class="pagination-sm"
+    ng-model="currentPage"
+    total-items="ordersLenght"
+    ng-change="changePage()"
+    items-per-page="maxSize"
+    uib-pagination></ul>

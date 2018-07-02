@@ -1,0 +1,54 @@
+﻿
+
+<hr />
+<button ui-sref="products/new" class="btn btn-default">Create New Product</button>
+<br />
+<hr />
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Orders are sorted by: {{propertyName}} in {{reverse? 'Descending':'Acsending'}} order</div>
+    <div class="panel-heading">
+        
+        <br/>
+        <div class="input-group">
+            <input type="text" ng-model="search" placeholder="Search" ng-change="change(search)" class="form-control" />
+        </div>
+        <br/>
+    </div>
+    <!-- Table -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th ng-click="sortBy('Name')">
+                Name
+                <sort-column asc="!reverse"  name="Name" ng-show="propertyName==='Name'"></sort-column>
+            </th>
+            <th ng-click="sortBy('Description')">
+                Description
+                <sort-column asc="!reverse" name="Name" ng-show="propertyName==='Description'"></sort-column>
+            </th>
+            <th ng-click="sortBy('Category')">
+                Category
+                <sort-column asc="!reverse" name="Name" ng-show="propertyName==='Category'"></sort-column>
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="product in products">
+            <td>{{product.Name}}</td>
+            <td>{{product.Description}}</td>
+            <td>{{product.Category.Name}}</td>
+            <td><button ng-click="editProduct(product.Id)" class="form-control">Edit</button></td>
+            <td><button ng-click="deleteProduct(product)" class="form-control">Delete</button></td>
+        </tr>
+        </tbody>
+    </table>
+    <ul boundary-link-numbers="true"
+        class="pagination-sm"
+        ng-model="currentPage"
+        total-items="productsLenght"
+        ng-change="changePage()"
+        items-per-page="maxSize"
+        uib-pagination></ul>
+</div>

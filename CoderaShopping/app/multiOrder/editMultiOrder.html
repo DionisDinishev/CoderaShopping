@@ -1,0 +1,115 @@
+﻿No way ......
+<form name="editOrderForm">
+    <div class="container">
+        <div class="col-md-6">
+            <div class="input-group" ng-if="newOrder">
+                <label>
+                    OrderId
+                </label>
+                <input type="text" readonly="readonly" class="form-control" ng-model="order.Id">
+            </div>
+
+            <div class="input-group" ng-class="{'has-error':editOrderForm.products.$invalid && editOrderForm.products.$touched }">
+                <label>
+                    Product Name
+                </label>
+                <select class="form-control" ng-model="order.Products" multiple="multiple" name="products" ng-required="true">
+                    <option ng-repeat="product in products" value="{{product.Id}}"  ng-selected="product">{{product.Name}} </option>
+                </select>
+                <div ng-messages="editOrderForm.products.$error" ng-if="editOrderForm.products.$touched" style="color: red">
+                    <p ng-message="required">Select at leaset 1 product</p>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>
+                    Quantity
+                </label>
+                <input type="number" min="1" class="form-control" ng-model="order.Quantity" name="quantity" ng-required="true">
+                <div ng-messages="editOrderForm.quantity.$error" style="color: red">
+                    <p ng-message="required">Enter quantity</p>
+                </div>
+                {{editOrderForm.quantity.$error}}
+               
+            </div>
+            <div class="input-group">
+                <label>
+                    User Name
+                </label>
+                <select class="form-control" ng-model="order.User.Id" name="user" ng-required="true">
+                    <option ng-repeat="user in users" value="{{user.Id}}" >{{user.Name}} </option>
+                </select>
+                <div ng-messages="editOrderForm.user.$error" style="color: red">
+                    <p ng-message="required">Select User</p>
+                </div>
+            </div>
+            {{editOrderForm.$valid}}
+            <br/>
+            <br/>
+            <div class="input-group">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <button class="btn btn-default form-control" ng-click="saveOrder(order,editOrderForm)">Save</button>
+                    </div>
+                    <div class="col-md-6">
+
+                        <button class="btn btn-default form-control" ng-click="cancel(order,editOrderForm)">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" ng-if="validationErrors">
+            <validation-summary errors="validationErrors"></validation-summary>
+        </div>
+    </div>
+</form>
+
+<!--
+<form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Product list</h3>
+                <h4>Order</h4>
+                <ul id="productList">
+                    <li ng-repeat="product in productsList">
+                        <span> {{product.productName}}</span>
+                        <span> {{product.productQuantity}}</span>
+                        <span>
+                            <button type="button" ng-click="removeFromOrder(product)">Remove</button>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>
+                            Product
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="product in products">
+                        <td>{{product.Name}} </td>
+                        <td>
+                            <input type="text" ng-model="product.Quantity"/>
+                        </td>
+                        <td></td>
+                        <td>
+                            <button type="button" ng-click="addToOrder(product,product.Quantity)">Add</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>-->

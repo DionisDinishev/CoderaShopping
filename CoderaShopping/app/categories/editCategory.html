@@ -1,0 +1,58 @@
+﻿<form name="editCategoryForm">
+
+    <div class="container">
+        <div class="col-md-6">
+            <div class="input-group">
+                <label>Name</label>
+                <input name="name" type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1" value="{{category.Name}}" ng-model="category.Name"
+                       ng-required="true"
+                       ng-minlength="4"
+                       ng-maxlength="50"
+                       ng-pattern="regex">
+            </div>
+            <div ng-messages="editCategoryForm.name.$error" style="color: red">
+                <p ng-message="required">This field is requierd</p>
+                <p ng-message="minlength">Name should me at least 4 characteres</p>
+                <p ng-message="pattern">Name should only contains letters</p>
+                <p ng-message="maxlength">Name should be maximum 50 characters</p>
+            </div>
+            <br />
+            <div class="input-group">
+                <label>Status</label>
+                <br />
+                <input type="radio" name="Status" ng-value="true" ng-model="category.Status" title="Enabled">Enabled
+                <br />
+                <input type="radio" name="Status" ng-value="false" ng-model="category.Status" title="Disabled">Disabled
+            </div>
+            <br />
+            <br />
+
+            <div class="input-group">
+                <div>
+                    <label>Is Default</label>&nbsp;&nbsp;
+                    <input type="checkbox" ng-model="category.IsDefault" />
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="input-group">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <button class="btn btn-default form-control" ng-click="saveCategory(category,editCategoryForm)" type="submit" ng-disabled="editCategoryForm.$invalid">Save</button>
+                    </div>
+                    <div class="col-md-6">
+
+                        <button class="btn btn-default form-control" ng-click="cancel(category,editCategoryForm)">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" ng-if="validationErrors">
+            <validation-summary errors="validationErrors"></validation-summary>
+            
+        </div>
+
+
+    </div>
+</form>
